@@ -1,0 +1,18 @@
+{
+  "name": "tradestream-postgres-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "tradestream_user",
+    "database.password": "tradestream_pass",
+    "database.dbname": "tradestream",
+    "database.server.name": "tradestream_server",
+    "topic.prefix": "tradestream",
+    "plugin.name": "pgoutput",
+    "publication.name": "tradestream_publication",
+    "slot.name": "tradestream_slot",
+    "table.include.list": "public.companies,public.trade_orders,public.market_prices",
+    "tombstones.on.delete": "false"
+  }
+}

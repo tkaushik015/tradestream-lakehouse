@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "CompanyFundamentalsEvent",
+  "namespace": "com.tradestream.events",
+  "fields": [
+    { "name": "ticker", "type": "string" },
+    { "name": "company_name", "type": "string" },
+    { "name": "sector", "type": ["null", "string"], "default": null },
+    { "name": "industry", "type": ["null", "string"], "default": null },
+    { "name": "exchange", "type": ["null", "string"], "default": null },
+    { "name": "event_time", "type": "string" }
+  ]
+}

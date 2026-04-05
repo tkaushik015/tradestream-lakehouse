@@ -1,0 +1,11 @@
+pytest
+black
+isort
+ruff
+faker
+pandas
+sqlalchemy
+psycopg2-binary
+kafka-python
+dbt-core
+dbt-postgres

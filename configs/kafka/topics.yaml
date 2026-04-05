@@ -1,0 +1,12 @@
+topics:
+  - name: trade_events
+    partitions: 3
+    replication_factor: 1
+
+  - name: price_events
+    partitions: 3
+    replication_factor: 1
+
+  - name: sec_filings
+    partitions: 1
+    replication_factor: 1

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: tradestream
+    schema: public
+    tables:
+      - name: trade_orders
+      - name: companies
+      - name: market_prices

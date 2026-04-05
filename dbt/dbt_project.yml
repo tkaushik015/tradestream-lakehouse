@@ -1,0 +1,21 @@
+name: "tradestream_dbt"
+version: "1.0.0"
+config-version: 2
+
+profile: "tradestream_dbt"
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+models:
+  tradestream_dbt:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
+
+snapshots:
+  tradestream_dbt:
+    +target_schema: snapshots

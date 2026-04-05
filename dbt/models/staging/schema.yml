@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_trades
+    description: "Staging model for trade orders"
+
+  - name: stg_prices
+    description: "Staging model for market prices"

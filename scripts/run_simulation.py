@@ -1,0 +1,1 @@
+print("Trade simulation placeholder")

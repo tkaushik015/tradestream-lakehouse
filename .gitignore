@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# OS
+.DS_Store
+
+# Env files
+.env
+
+# dbt
+dbt_packages/
+target/
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Airflow
+airflow/logs/
+airflow-webserver.pid
+
+# Misc
+*.log

@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "PriceEvent",
+  "namespace": "com.tradestream.events",
+  "fields": [
+    { "name": "ticker", "type": "string" },
+    { "name": "market_price", "type": "double" },
+    { "name": "event_time", "type": "string" },
+    { "name": "source", "type": "string" }
+  ]
+}

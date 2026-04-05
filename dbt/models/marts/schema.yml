@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_trades
+    description: "Fact table for trades"
+
+  - name: dim_companies
+    description: "Dimension table for companies"
+
+  - name: agg_daily_volume
+    description: "Daily trade aggregation by ticker"

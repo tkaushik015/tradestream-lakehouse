@@ -1,0 +1,14 @@
+name: terraform-plan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Terraform placeholder
+        run: echo "Terraform plan workflow will be added in future iterations."
