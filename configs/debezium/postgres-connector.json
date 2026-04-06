@@ -1,18 +1,26 @@
 {
-  "name": "tradestream-postgres-connector",
+  "name": "tradestream-postgres-cdc",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "database.hostname": "postgres",
     "database.port": "5432",
-    "database.user": "tradestream_user",
-    "database.password": "tradestream_pass",
-    "database.dbname": "tradestream",
-    "database.server.name": "tradestream_server",
-    "topic.prefix": "tradestream",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "trading_db",
+    "topic.prefix": "trading",
     "plugin.name": "pgoutput",
     "publication.name": "tradestream_publication",
     "slot.name": "tradestream_slot",
-    "table.include.list": "public.companies,public.trade_orders,public.market_prices",
+    "table.include.list": "public.trade_orders,public.portfolio_positions,public.trading_accounts",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "transforms.unwrap.add.fields": "op,ts_ms,table",
+    "heartbeat.interval.ms": "10000",
+    "snapshot.mode": "initial",
     "tombstones.on.delete": "false"
   }
 }
