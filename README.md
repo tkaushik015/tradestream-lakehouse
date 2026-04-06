@@ -55,3 +55,13 @@ TradeStream simulates a production-grade lakehouse pipeline for ingesting trade 
                                        | BI / Analytics Layer |
                                        | dashboards / reports |
                                        +----------------------+
+
+
+
+## Current Working Milestone
+- PostgreSQL OLTP source running locally in Docker
+- Simulated trading workload generating inserts and updates
+- Debezium CDC streaming PostgreSQL changes into Kafka
+- Schema Registry and Kafka Connect running locally
+- Kafka topics created for trade_orders, portfolio_positions, trading_accounts
+- Bronze data landing into MinIO via Kafka Connect S3 Sink
