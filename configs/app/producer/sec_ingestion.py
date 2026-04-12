@@ -39,13 +39,8 @@ def extract_metric_records(ticker, cik, facts_json):
 
         for unit_name, values in units.items():
             for row in values:
-                form = row.get("form")
                 val = row.get("val")
-
                 if val is None:
-                    continue
-
-                if form not in {"10-K", "10-Q"}:
                     continue
 
                 records.append(
