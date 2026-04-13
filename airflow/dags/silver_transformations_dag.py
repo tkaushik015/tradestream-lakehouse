@@ -4,12 +4,11 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 DEFAULT_ENV = {
-    "PYSPARK_PYTHON": "/opt/anaconda3/bin/python",
-    "PYSPARK_DRIVER_PYTHON": "/opt/anaconda3/bin/python",
-    "JAVA_HOME": "/usr/local/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home",
-    "PATH": "/usr/local/opt/openjdk@17/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/anaconda3/bin",
-    "JDK_JAVA_OPTIONS": "--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
-    "JAVA_TOOL_OPTIONS": "--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
+    "PYSPARK_PYTHON": "python",
+    "PYSPARK_DRIVER_PYTHON": "python",
+    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-arm64",
+    "PATH": "/usr/lib/jvm/java-17-openjdk-arm64/bin:/home/airflow/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONPATH": "/opt/tradestream",
 }
 
 with DAG(
@@ -24,7 +23,7 @@ with DAG(
         task_id="silver_trade_orders",
         bash_command="""
         cd /opt/tradestream && \
-        /opt/anaconda3/bin/python -m app.silver.silver_trade_orders
+        python -m app.silver.silver_trade_orders
         """,
         env=DEFAULT_ENV,
     )
@@ -33,7 +32,7 @@ with DAG(
         task_id="silver_price_snapshots",
         bash_command="""
         cd /opt/tradestream && \
-        /opt/anaconda3/bin/python -m app.silver.silver_price_snapshots
+        python -m app.silver.silver_price_snapshots
         """,
         env=DEFAULT_ENV,
     )
@@ -42,7 +41,7 @@ with DAG(
         task_id="silver_company_financials",
         bash_command="""
         cd /opt/tradestream && \
-        /opt/anaconda3/bin/python -m app.silver.silver_company_financials
+        python -m app.silver.silver_company_financials
         """,
         env=DEFAULT_ENV,
     )
