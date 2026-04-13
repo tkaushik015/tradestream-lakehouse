@@ -1,8 +1,12 @@
 select
-    price_id,
     ticker,
-    market_price,
-    event_time,
+    price,
+    volume,
+    high,
+    low,
+    open,
     source,
-    created_at
-from {{ source('tradestream', 'market_prices') }}
+    event_timestamp,
+    trade_date,
+    _silver_loaded_at
+from {{ source('tradestream', 'price_snapshots') }}

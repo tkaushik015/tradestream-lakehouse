@@ -3,6 +3,24 @@ version: 2
 models:
   - name: stg_trades
     description: "Staging model for trade orders"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: ticker
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
 
   - name: stg_prices
     description: "Staging model for market prices"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: trade_date
+        tests:
+          - not_null

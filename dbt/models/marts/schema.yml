@@ -3,9 +3,28 @@ version: 2
 models:
   - name: fct_trades
     description: "Fact table for trades"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: trade_value
+        tests:
+          - not_null
 
   - name: dim_companies
-    description: "Dimension table for companies"
+    description: "Dimension-style table for company financial records"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
 
   - name: agg_daily_volume
-    description: "Daily trade aggregation by ticker"
+    description: "Daily price aggregation by ticker"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: trade_date
+        tests:
+          - not_null

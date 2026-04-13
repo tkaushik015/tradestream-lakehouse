@@ -1,8 +1,10 @@
 select
     ticker,
-    date(event_time) as trade_date,
-    count(*) as total_trades,
-    sum(quantity) as total_quantity,
-    sum(quantity * price) as total_trade_value
-from {{ source('tradestream', 'trade_orders') }}
+    trade_date,
+    count(*) as total_price_events,
+    sum(volume) as total_volume,
+    avg(price) as avg_price,
+    min(low) as day_low,
+    max(high) as day_high
+from {{ source('tradestream', 'price_snapshots') }}
 group by 1, 2

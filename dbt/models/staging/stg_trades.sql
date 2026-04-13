@@ -1,13 +1,14 @@
 select
-    trade_id,
     order_id,
-    company_id,
-    ticker,
+    account_id,
+    ticker_symbol as ticker,
     order_type,
-    side,
     quantity,
-    price,
-    order_status,
-    event_time,
-    created_at
+    limit_price,
+    executed_price,
+    status,
+    placed_at,
+    executed_at,
+    settled_at,
+    updated_at
 from {{ source('tradestream', 'trade_orders') }}

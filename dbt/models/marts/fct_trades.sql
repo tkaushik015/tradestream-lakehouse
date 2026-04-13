@@ -1,14 +1,16 @@
 select
-    trade_id,
     order_id,
-    company_id,
-    ticker,
+    account_id,
+    ticker_symbol as ticker,
     order_type,
-    side,
     quantity,
-    price,
-    quantity * price as trade_value,
-    order_status,
-    event_time,
-    created_at
+    limit_price,
+    executed_price,
+    coalesce(executed_price, limit_price) as effective_price,
+    quantity * coalesce(executed_price, limit_price) as trade_value,
+    status,
+    placed_at,
+    executed_at,
+    settled_at,
+    updated_at
 from {{ source('tradestream', 'trade_orders') }}

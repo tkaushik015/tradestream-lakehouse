@@ -2,23 +2,27 @@
 
 {{
     config(
-      target_schema='snapshots',
-      unique_key='company_id',
-      strategy='timestamp',
-      updated_at='updated_at'
+      target_schema='public',
+      unique_key='ticker',
+      strategy='check',
+      check_cols=['cik', 'metric', 'sec_metric', 'unit', 'fiscal_year', 'fiscal_period', 'form_type', 'filed_date']
     )
 }}
 
-select
-    company_id,
+select distinct
     ticker,
-    company_name,
-    sector,
-    industry,
-    exchange,
-    is_active,
-    created_at,
-    updated_at
-from {{ source('tradestream', 'companies') }}
+    cik,
+    metric,
+    sec_metric,
+    unit,
+    fiscal_year,
+    fiscal_period,
+    form_type,
+    filed_date,
+    frame,
+    source,
+    ingested_at,
+    _silver_loaded_at
+from {{ source('tradestream', 'company_financials') }}
 
 {% endsnapshot %}

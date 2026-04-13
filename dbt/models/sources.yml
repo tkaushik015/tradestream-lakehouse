@@ -5,5 +5,5 @@ sources:
     schema: public
     tables:
       - name: trade_orders
-      - name: companies
-      - name: market_prices
+      - name: price_snapshots
+      - name: company_financials
