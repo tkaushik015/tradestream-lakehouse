@@ -1,0 +1,6 @@
+# requirements-silver.txt
+# Install:  pip install -r requirements-silver.txt
+
+pyspark==3.5.1
+delta-spark==3.2.0
+boto3>=1.28.0

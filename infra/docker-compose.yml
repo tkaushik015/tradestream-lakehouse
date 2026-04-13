@@ -118,6 +118,49 @@ services:
     volumes:
       - minio_data:/data
 
+  airflow-webserver:
+    image: apache/airflow:2.9.3
+    container_name: tradestream-airflow-webserver
+    depends_on:
+      - postgres
+      - kafka
+      - minio
+    ports:
+      - "8088:8080"
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__WEBSERVER__AUTH_BACKENDS: airflow.www.auth.backend.basic_auth
+      PYTHONPATH: /opt/tradestream
+    volumes:
+      - airflow_data:/opt/airflow
+      - ../airflow/dags:/opt/airflow/dags
+      - ..:/opt/tradestream
+    command: bash -c "airflow db init && airflow users create --username airflow --password airflow --firstname Tushar --lastname Kaushik --role Admin --email tushar@example.com || true && airflow webserver"
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.3
+    container_name: tradestream-airflow-scheduler
+    depends_on:
+      - airflow-webserver
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__WEBSERVER__AUTH_BACKENDS: airflow.www.auth.backend.basic_auth
+      PYTHONPATH: /opt/tradestream
+    volumes:
+      - airflow_data:/opt/airflow
+      - ../airflow/dags:/opt/airflow/dags
+      - ..:/opt/tradestream
+    command: bash -c "airflow scheduler"
+
 volumes:
   postgres_data:
   minio_data:
+  airflow_data:
