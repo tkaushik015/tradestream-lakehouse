@@ -1,0 +1,12 @@
+tradestream_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: trading_db
+      schema: public
+      threads: 4

@@ -32,13 +32,13 @@ try:
     price_df = spark.read.format("delta").load(f"{SILVER_PATH}/price_snapshots")
     company_df = spark.read.format("delta").load(f"{SILVER_PATH}/company_financials")
 
-    price_df.write.mode("overwrite").jdbc(
+    price_df.write.mode("append").jdbc(
         url=POSTGRES_URL,
         table="public.price_snapshots",
         properties=POSTGRES_PROPS,
     )
 
-    company_df.write.mode("overwrite").jdbc(
+    company_df.write.mode("append").jdbc(
         url=POSTGRES_URL,
         table="public.company_financials",
         properties=POSTGRES_PROPS,
