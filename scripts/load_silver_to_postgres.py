@@ -32,6 +32,35 @@ try:
     price_df = spark.read.format("delta").load(f"{SILVER_PATH}/price_snapshots")
     company_df = spark.read.format("delta").load(f"{SILVER_PATH}/company_financials")
 
+    price_df = price_df.select(
+        "ticker",
+        "price",
+        "volume",
+        "high",
+        "low",
+        "open",
+        "source",
+        "event_timestamp",
+        "trade_date",
+        "_silver_loaded_at",
+    )
+
+    company_df = company_df.select(
+        "ticker",
+        "cik",
+        "metric",
+        "sec_metric",
+        "unit",
+        "fiscal_year",
+        "fiscal_period",
+        "form_type",
+        "filed_date",
+        "frame",
+        "source",
+        "ingested_at",
+        "_silver_loaded_at",
+    )
+
     price_df.write.mode("append").jdbc(
         url=POSTGRES_URL,
         table="public.price_snapshots",
